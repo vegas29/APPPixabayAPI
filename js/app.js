@@ -52,4 +52,30 @@ function buscarImagenes(termino){
 
 function mostrarImagenes(imagenes){
     console.log(imagenes);
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
+
+    //Ciclar sobre el arreglo de imagenes y construir el html
+    imagenes.forEach(imagen =>{
+        const {previewURL, likes, views, largeImageURL} = imagen;
+
+        resultado.innerHTML += `
+            <div class="w-1/2 md:w-1/3 lg:w-1/4 p-3 mb-4">
+                <div class="bg-white">
+                    <img class="w-full" src="${previewURL}">
+
+                    <div class="p-4">
+                        <p class="font-bold">${likes} <span class="font-light"> Me gusta </span></p>
+                        <p class="font-bold">${views} <span class="font-light"> Veces vista </span></p>
+
+                        <a class="block w-full bg-blue-800 hover:bg-blue-500 text-white uppercase font-bold text-center rounded mt-5 p-1"
+                            href="${largeImageURL}" target="_blank" rel="noopener noreferrer">
+                            Ver imagen
+                        </a>    
+                    </div>
+                </div>    
+            </div>
+        `;
+    })
 }
